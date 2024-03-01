@@ -1,0 +1,11 @@
+@import "../../src/styles/variables.scss";
+@import "../../src/styles/mixins.scss";
+
+h1 {
+  color: $green;
+}
+
+h1:hover {
+  color: $greenHover;
+  @include button;
+}
