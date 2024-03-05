@@ -1,14 +1,16 @@
 import { useState } from "react";
 import Items from "./items";
 import "./todoApp.scss";
-export default function list() {
-  const [itemTodo, setitemTodo] = useState("");
-  const [list, setList] = useState([]);
+
+export default function List() {
+  const [itemTodo, setItemTodo] = useState("");
+  const [List, setList] = useState([]);
 
   function handleChange(event) {
     const value = event.target.value;
-    setitemTodo(value);
+    setItemTodo(value);
   }
+
   function handleSubmit(e) {
     e.preventDefault();
     const newTodo = {
@@ -17,36 +19,32 @@ export default function list() {
       completed: false,
     };
 
-    function handleUpdate(id, value) {
-      const temp = [...list];
-      const item = temp.find((item) => item, id === id);
-      item.title;
-    }
-    setList([...list, newTodo]);
-    setitemTodo("");
-  }
-}
+    function handleUpdate() {}
+    function handleDelete() {}
 
-return (
-  <>
-    <div className="todoContainer">
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleChange} />
-        <button type="submit">Creer une tache </button>
-        <p>{list}</p>
-      </form>
+    setList([...List, newTodo]);
+    setItemTodo("");
+  }
+  return (
+    <>
       <div className="todoContainer">
-        <ul>
-          {list.map((item) => {
-            <Items
-              key={item.id}
-              item={item}
-              onUpdate={handleUpdate}
-              onDelete={handleDelete}
-            />;
-          })}
-        </ul>
+        <form onSubmit={handleSubmit}>
+          <input type="text" onChange={handleChange} />
+          <button type="submit">Create task</button>
+        </form>
+        <div className="todoContainer">
+          <ul className="listTodo">
+            {List.map((item) => {
+              <Items
+                key={item.id}
+                item={item}
+                onUpdate={handleUpdate}
+                onDelete={handleDelete}
+              />;
+            })}
+          </ul>
+        </div>
       </div>
-    </div>
-  </>
-);
+    </>
+  );
+}
