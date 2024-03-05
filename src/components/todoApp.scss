@@ -9,3 +9,7 @@ h1:hover {
   color: $greenHover;
   @include button;
 }
+
+body {
+  background: #ffffff;
+}
