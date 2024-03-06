@@ -2,9 +2,9 @@ import { useState } from "react";
 import Items from "./items";
 import "./todoApp.scss";
 
-export default function List() {
+const todoApp = () => {
   const [itemTodo, setItemTodo] = useState("");
-  const [List, setList] = useState([]);
+  const [list, setList] = useState([]);
 
   function handleChange(event) {
     const value = event.target.value;
@@ -18,33 +18,45 @@ export default function List() {
       title: itemTodo,
       completed: false,
     };
-
-    function handleUpdate() {}
-    function handleDelete() {}
-
-    setList([...List, newTodo]);
+    setList([...list, newTodo]);
     setItemTodo("");
   }
+
+  function handleUpdate(id, value) {
+    const temp = [...list];
+    const item = temp.find((item) => item.id === id);
+    item.title = value;
+    setList(temp);
+  }
+
+  function handleDelete(id) {
+    const temp = list.filter((item) => item.id !== id);
+    setList(temp);
+  }
   return (
-    <>
+    <div className="todoContainer">
+      <form onSubmit={handleSubmit}>
+        <input type="text" onChange={handleChange} value={itemTodo} />
+
+        <button onClick={handleSubmit} type="submit">
+          Créer une tache
+        </button>
+      </form>
+
       <div className="todoContainer">
-        <form onSubmit={handleSubmit}>
-          <input type="text" onChange={handleChange} />
-          <button type="submit">Create task</button>
-        </form>
-        <div className="todoContainer">
-          <ul className="listTodo">
-            {List.map((item) => {
-              <Items
-                key={item.id}
-                item={item}
-                onUpdate={handleUpdate}
-                onDelete={handleDelete}
-              />;
-            })}
-          </ul>
-        </div>
+        <ul className="listTodo">
+          {list.map((item) => (
+            <Items
+              key={item.id}
+              item={item}
+              onUpdate={handleUpdate}
+              onDelete={handleDelete}
+            />
+          ))}
+        </ul>
       </div>
-    </>
+    </div>
   );
-}
+};
+
+export default todoApp;

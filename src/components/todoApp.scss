@@ -1,15 +1,76 @@
 @import "../../src/styles/variables.scss";
 @import "../../src/styles/mixins.scss";
 
-h1 {
-  color: $green;
+.todoContainer {
+  width: 100%;
+  margin: 1rem 0;
+  form {
+    width: 600px;
+    @include flexCenter;
+    align-items: stretch;
+    input {
+      flex: 3;
+      padding: 1rem;
+      border: 1px solid #e2e2e2;
+      outline: none;
+    }
+    button {
+      flex: 1;
+      background: $green;
+      @include button;
+      color: $light;
+      transition: 0.2s ease-in-out;
+      &:hover {
+        background: $greenHover;
+      }
+    }
+  }
 }
 
-h1:hover {
-  color: $greenHover;
-  @include button;
+.listTodo {
+  list-style: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Centre les éléments de la liste */
+  gap: 1rem;
+  .cardTodo {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+    border: 1px solid #e4e4e4;
+    box-shadow: 0 5px 5px 0 rgba(3, 163, 222, 0.2); /* Ajoute une ombre portée */
+  }
 }
 
-body {
-  background: #ffffff;
+.settings {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 2rem;
+}
+
+.settings button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  @include flexCenter;
+  cursor: pointer;
+  transition: 0.2s ease-in-out;
+}
+.settings button:first-child {
+  background: $yellow;
+  color: $dark;
+  &:hover {
+    background: $yellowHover;
+  }
+}
+.settings button:last-child {
+  background: $red;
+  color: $light;
+  &:hover {
+    background: $redHover;
+  }
 }
