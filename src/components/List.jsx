@@ -2,7 +2,7 @@ import { useState } from "react";
 import Items from "./items";
 import "./todoApp.scss";
 
-const todoApp = () => {
+const TodoApp = () => {
   const [itemTodo, setItemTodo] = useState("");
   const [list, setList] = useState([]);
 
@@ -14,7 +14,7 @@ const todoApp = () => {
   function handleSubmit(e) {
     e.preventDefault();
     const newTodo = {
-      id: crypto.randomUUID(),
+      id: Math.random().toString(36).substr(2, 9), // Génération d'un identifiant unique
       title: itemTodo,
       completed: false,
     };
@@ -33,14 +33,12 @@ const todoApp = () => {
     const temp = list.filter((item) => item.id !== id);
     setList(temp);
   }
+
   return (
     <div className="todoContainer">
       <form onSubmit={handleSubmit}>
         <input type="text" onChange={handleChange} value={itemTodo} />
-
-        <button onClick={handleSubmit} type="submit">
-          Créer une tache
-        </button>
+        <button type="submit">Créer une tache</button>
       </form>
 
       <div className="todoContainer">
@@ -59,4 +57,4 @@ const todoApp = () => {
   );
 };
 
-export default todoApp;
+export default TodoApp;
